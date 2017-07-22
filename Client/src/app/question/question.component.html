@@ -1,0 +1,47 @@
+<a [routerLink]="['/landing']">Home</a> | <a [routerLink]="['/new_question']">Add a Question</a>
+
+<h1>New Question</h1>
+<form #questionForm="ngForm" (submit)="processForm()"> 
+  Question:<textarea 
+    [(ngModel)]="question.content"
+    #content="ngModel"
+    required
+    minlength="15"
+    name="content"
+    rows="4" 
+    cols="40"></textarea>  
+    <br>
+    <div class="col-sm-6 error" *ngIf='!content.valid && (content.dirty || content.touched)'>Please enter atleast 15 characters for content</div>
+  Correct Answer:<input 
+    [(ngModel)]="question.correctAns"
+    #correctAns="ngModel"
+    required
+    type="text" 
+    name="correctAns" 
+    value=""> 
+    
+    <br>
+     <div class="col-sm-6 error" *ngIf='!correctAns.valid && (correctAns.dirty || correctAns.touched)'>Please enter Correct Answer</div>
+  Fake Answer 1:<input
+    [(ngModel)]="question.fakeAnsa"
+    #fakeAnsa="ngModel"
+    required
+    type="text" 
+    name="fakeAnsa" 
+    value=""> 
+    <br>
+    <div class="col-sm-6 error" *ngIf='!fakeAnsa.valid && (fakeAnsa.dirty || fakeAnsa.touched)'>Please enter Fake Answer 1</div>
+  Fake Answer 2:<input 
+    [(ngModel)]="question.fakeAnsb"
+    #fakeAnsb = "ngModel"
+    required
+    type="text" 
+    name="fakeAnsb" 
+    value=""> 
+    <br>
+     <div class="col-sm-6 error" *ngIf='!fakeAnsb.valid && (fakeAnsb.dirty || fakeAnsb.touched)'>Please enter Fake Answer 2</div>
+   <button [routerLink]="['/landing']">Cancel</button> 
+  
+   <input type="submit" value="Add Question" [disabled]="!questionForm.form.valid" class="btn btn-primary">
+  
+</form>

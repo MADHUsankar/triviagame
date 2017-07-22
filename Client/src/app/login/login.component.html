@@ -1,0 +1,97 @@
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <meta charset="utf-8"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <title>Belt App</title>
+    <!-- Bootstrap -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+<body>
+
+<div class="login">
+  <form (submit)="login()" #loginForm="ngForm">
+    <div class="form-group">
+      <label>*Email:</label>
+        <input type="email" name="lemail" [(ngModel)]="luser.email" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label>*Password:</label>
+      <input type="password" name="lpassword" [(ngModel)]="luser.password" required class="form-control">
+    </div>
+
+    <div *ngIf="loginError"><p class="error">{{loginError}}</p></div>
+    <br>
+
+    <input type="submit" value="Log In" [disabled]="!loginForm.form.valid" class="btn btn-primary">
+  </form>
+       <span style="color:red;" *ngIf='login_error.status && login_error.message._body < 5'>Email or password is incorrect</span>
+  <span style="color:red;" *ngIf='login_error.status && login_error.message._body >= 5'>You have made too many failures, login is disabled for one hour</span>
+  
+</div>
+
+<div class="register">
+  <form (submit)="registration()" #regForm="ngForm">
+    <div *ngIf="regError"><p class="error">{{regError}}</p></div>
+    <div class="form-group">
+      <div class="col-sm-4"><label>*First Name:</label></div>
+      <div class="col-sm-7">
+        <input type="text" name="fname" required [(ngModel)]="ruser.first_name" #firstName="ngModel" class="form-control">
+      </div>
+    </div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-6 error" *ngIf='!firstName.valid && (firstName.dirty || firstName.touched)'>First name is required</div>
+
+    <br><br><br>
+
+    <div class="form-group">
+      <div class="col-sm-4"><label>*Last Name:</label></div>
+      <div class="col-sm-7">
+        <input type="text" name="lname" required [(ngModel)]="ruser.last_name" #lastName="ngModel" class="form-control">
+      </div>
+    </div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-6 error" *ngIf='!lastName.valid && (lastName.dirty || lastName.touched)'>Last name is required</div>
+      
+    <br><br>
+      
+    <div class="form-group">
+      <div class="col-sm-4"><label>*Email:</label></div>
+      <div class="col-sm-7">
+        <input type="email" name="remail" required pattern="^([A-Za-z0-9._\-]+)@([a-zA-Z0-9._\-]+)\.([a-zA-Z]+)$" [(ngModel)]="ruser.email" #remail="ngModel" class="form-control">
+      </div>
+    </div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-6 error" *ngIf='!remail.valid && (remail.dirty || remail.touched)'>Email is not valid</div>
+      
+    <br><br>
+     <div class="form-group">
+      <div class="col-sm-4"><label>*Password:</label></div>
+      <div class="col-sm-7">
+        <input type="password" name="rpassword" required [(ngModel)]="ruser.password" #rpassword="ngModel" minlength="8" class="form-control" validateEqual="confirmPassword" reverse="true">
+      </div>
+    </div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-6 error" *ngIf='!rpassword.valid && (rpassword.dirty || rpassword.touched)'>Must be at least 8 characters</div>
+      
+    <br><br>
+      
+    <div class="form-group">
+      <div class="col-sm-4"><label>*Confirm Password:</label></div>
+      <div class="col-sm-7">
+        <input type="password" name="confirmPassword" [(ngModel)]="ruser.confirmPassword" #confirmPassword="ngModel" validateEqual="rpassword" reverse="false" class="form-control">
+      </div>
+    </div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-6 error" *ngIf='!confirmPassword.valid && (confirmPassword.dirty || confirmPassword.touched)'>Passwords do not match</div>
+    
+    <br><br><br>
+      
+    <input type="submit" value="Register" [disabled]="!regForm.form.valid" class="btn btn-primary">
+  </form>
+</div>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    

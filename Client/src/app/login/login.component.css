@@ -1,0 +1,29 @@
+
+
+.login, .register {
+    display: inline-block;
+    vertical-align: top;
+    border: 1px solid black;
+    margin: auto;
+    padding: 1%;
+}
+
+.login {
+    width: 30%;
+    margin-left: 10%;
+}
+
+.register {
+    width: 40%;
+    margin-left: 9%; 
+}
+
+.error {
+    color: red;
+}
+
+ 
+.btn {
+    display: inline-block;
+    margin-left: 40%;
+}

@@ -1,0 +1,32 @@
+<h1>Hi {{name}}</h1>
+<p> Choose an answer for each question</p>
+<h2> Good Luck!</h2>
+ 
+      
+ <form #playForm = "ngForm" (submit)="processPlay()">
+  <p *ngIf="questionarr[0].content"> {{questionarr[0].content}}</p>
+  <select name = "question1" #question1 = "ngModel" [(ngModel)]="user.question1" required >
+    <option value="correctAns">{{questionarr[0].correctAns}}</option>
+    <option value="wrong">{{questionarr[0].fakeAnsa}}</option>
+    <option value="wrong">{{questionarr[0].fakeAnsb}}</option>
+ </select>
+ <div class="col-sm-6 error" *ngIf='!question1.valid && (question1.dirty || question1.touched)'>Please enter Correct Answer</div>
+  <p *ngIf="questionarr[1].content"> {{questionarr[1].content}}</p>
+  <select name = "question2" #question2 = "ngModel" [(ngModel)]="user.question2" required >
+    <option value="correctAns">{{questionarr[1].correctAns}}</option>
+    <option value="wrong">{{questionarr[1].fakeAnsa}}</option>
+    <option value="wrong">{{questionarr[1].fakeAnsb}}</option>
+  </select><span *ngIf="question2.errors">Please select an answer</span>
+  <p *ngIf="questionarr[2].content"> {{questionarr[2].content}}</p>
+  <select name = "question3" #question3 = "ngModel" [(ngModel)]="user.question3" required >
+    <option value="correctAns">{{questionarr[2].correctAns}}</option>
+    <option value="wrong">{{questionarr[2].fakeAnsa}}</option>
+    <option value="wrong">{{questionarr[2].fakeAnsb}}</option>
+  </select><span *ngIf="question3.errors">Please select an answer</span>
+  <input type="hidden" name="name" value={{name}}>
+<br>
+
+  <button [routerLink]="['/landing']">Cancel</button>
+  <input type="submit" [disabled]="!playForm.form.valid"name="" value="submit">
+</form> 
+
